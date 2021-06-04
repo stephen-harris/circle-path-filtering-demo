@@ -25,7 +25,7 @@ workflows:
   check-updated-files:
     jobs:
       - path-filtering/filter:
-        mapping: |
-          src/.* run-build true
-        base-revision: main
-        config-path: .circleci/config.yml
+          mapping: |
+            src/.* run-build true
+          base-revision: main
+          config-path: .circleci/config.yml
