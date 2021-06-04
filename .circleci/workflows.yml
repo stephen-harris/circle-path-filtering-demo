@@ -1,0 +1,19 @@
+version: 2.1
+
+parameters:
+  run-build:
+    type: boolean
+    default: false
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - run: "Dummy build"
+
+workflows:
+  version: 2.1
+  infrastructure:
+    when: << pipeline.parameters.run-build >>
+    jobs:
+      - build
