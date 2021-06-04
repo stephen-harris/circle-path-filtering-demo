@@ -1,0 +1,32 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  path-filtering: circleci/path-filtering@0.0.2
+
+parameters:
+  run-build:
+    type: boolean
+    default: false
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - run: "Dummy build"
+
+workflows:
+  version: 2
+  infrastructure:
+    when: << pipeline.parameters.run-build >>
+    jobs:
+      - build
+
+  check-updated-files:
+    jobs:
+      - path-filtering/filter:
+        mapping: |
+          src/.* run-build true
+        base-revision: main
+        config-path: .circleci/config.yml
