@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   region-ap1:
     type: boolean
-    default: true
+    default: false
   region-eu1:
     type: boolean
     default: false
