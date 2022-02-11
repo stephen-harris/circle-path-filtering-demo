@@ -6,7 +6,7 @@ parameters:
     default: false
   region:
     type: string
-    default: false
+    default: "na"
 
 commands:
   print:
@@ -21,7 +21,8 @@ jobs:
     machine: true
     steps:
       - run: "Dummy build"
-
+      - run: echo << parameters.region >>
+      
   cat-file:
     parameters:
       file:
@@ -41,6 +42,5 @@ workflows:
   my-workflow:
     when: << pipeline.parameters.run-region >>
     jobs:
-      - cat-file:
-          file: test.txt
+      - build
 
