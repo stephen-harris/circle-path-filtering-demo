@@ -27,7 +27,7 @@ workflows:
           matrix:
             parameters:
               region: [
-                 "eu1", 
-                 "ap1"
+                 <<#pipeline.parameters.run-eu1>>–"eu1"<</pipeline.parameters.run-eu1>>,
+                 <<#pipeline.parameters.run-ap1>>–"ap1"<</pipeline.parameters.run-eu1>>
               ]
 
