@@ -27,7 +27,10 @@ workflows:
           matrix:
             parameters:
               region: [
-                 <<#pipeline.parameters.region-eu1>>–"eu1"<</pipeline.parameters.region-eu1>>,
-                 <<#pipeline.parameters.region-ap1>>–"ap1"<</pipeline.parameters.region-ap1>>
+                 <<#pipeline.parameters.region-eu1>>"eu1"<</pipeline.parameters.region-eu1>>,
+                 <<#pipeline.parameters.region-ap1>>"ap1"<</pipeline.parameters.region-ap1>>
               ]
+            exclude:
+               - example: ""
+              
 
