@@ -14,7 +14,7 @@ jobs:
     machine: true
     steps:
       - run: "Dummy build"
-      - run: echo << parameters.region >>
+      - run: echo << pipeline.parameters.region >>
       
 workflows:
   version: 2.1
