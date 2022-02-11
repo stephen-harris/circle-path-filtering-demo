@@ -31,6 +31,6 @@ workflows:
                  <<#pipeline.parameters.region-ap1>>"ap1"<</pipeline.parameters.region-ap1>>
               ]
             exclude:
-               - example: ""
+               - region: ""
               
 
