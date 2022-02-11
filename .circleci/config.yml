@@ -9,7 +9,6 @@ workflows:
   setup:
     jobs:
       - path-filtering/filter:
-          # Only set run-infrastructure to true if any folders containing terraform that would be run have changed:
           mapping: |
             eu1/.* region "eu1"
           base-revision: main
@@ -20,5 +19,5 @@ workflows:
           mapping: |
             ap1/.* region "ap1"
           base-revision: main
-          config-path: .circleci/workflows.yml
+          config-path: .circleci/workflows2.yml
       
