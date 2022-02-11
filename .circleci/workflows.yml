@@ -8,13 +8,23 @@ parameters:
       
 jobs:
   build:
+    parameters:
+      region:
+        type: string
+        default: "na"
     machine: true
     steps:
-      - run: echo << pipeline.parameters.region >>
+      - run: echo << parameters.region >>
       
 workflows:
   version: 2.1  
   my-workflow:
     jobs:
       - build
+        matrix:
+          parameters:
+            region: [
+               "eu1", 
+               "ap1"
+            ]
 
