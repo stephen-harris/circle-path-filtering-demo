@@ -4,8 +4,8 @@ parameters:
   run-build:
     type: boolean
     default: false
-  regions:
-    type: boolean
+  region:
+    type: string
     default: false
 
 jobs:
