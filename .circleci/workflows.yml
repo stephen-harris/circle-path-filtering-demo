@@ -8,13 +8,6 @@ parameters:
     type: string
     default: "na"
 
-commands:
-  print:
-    parameters:
-      message:
-        type: string
-    steps:
-      - run: echo << parameters.region >>
       
 jobs:
   build:
@@ -23,15 +16,6 @@ jobs:
       - run: "Dummy build"
       - run: echo << parameters.region >>
       
-  cat-file:
-    parameters:
-      file:
-        type: string
-    steps:
-      - print:
-          message: Printing << parameters.file >>
-      - run: cat << parameters.file >>
-
 workflows:
   version: 2.1
   infrastructure:
