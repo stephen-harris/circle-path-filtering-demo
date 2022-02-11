@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   region-ap1:
     type: boolean
-    default: false
+    default: true
   region-eu1:
     type: boolean
     default: false
@@ -27,7 +27,7 @@ workflows:
           matrix:
             parameters:
               region: [
-                 <<#pipeline.parameters.run-eu1>>–"eu1"<</pipeline.parameters.run-eu1>>,
-                 <<#pipeline.parameters.run-ap1>>–"ap1"<</pipeline.parameters.run-ap1>>
+                 <<#pipeline.parameters.region-eu1>>–"eu1"<</pipeline.parameters.region-eu1>>,
+                 <<#pipeline.parameters.region-ap1>>–"ap1"<</pipeline.parameters.region-ap1>>
               ]
 
