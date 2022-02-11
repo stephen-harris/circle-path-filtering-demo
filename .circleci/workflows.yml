@@ -1,7 +1,7 @@
 version: 2.1
 
 parameters:
-  run-build:
+  run-region:
     type: boolean
     default: false
   region:
@@ -16,13 +16,9 @@ jobs:
       - run: echo << pipeline.parameters.region >>
       
 workflows:
-  version: 2.1
-  infrastructure:
-    when: << pipeline.parameters.run-build >>
-    jobs:
-      - build
-      
+  version: 2.1  
   my-workflow:
+    when: << pipeline.parameters.run-region >>
     jobs:
       - build
 
