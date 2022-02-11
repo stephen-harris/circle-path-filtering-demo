@@ -8,6 +8,14 @@ parameters:
     type: string
     default: false
 
+commands:
+  print:
+    parameters:
+      message:
+        type: string
+    steps:
+      - run: echo << parameters.region >>
+      
 jobs:
   build:
     machine: true
