@@ -28,9 +28,11 @@ workflows:
             parameters:
               region: [
                  <<#pipeline.parameters.region-eu1>>eu1<</pipeline.parameters.region-eu1>>,
-                 ap1
+                 <<#pipeline.parameters.region-ap1>>ap1<</pipeline.parameters.region-ap1>>,
               ]
-            exclude:
-               - region: ap1
-              
+          #  exclude:
+          #     - region: ""
+          filters:
+            branches:
+              ignore: /<< matrix.region >>.*/
 
