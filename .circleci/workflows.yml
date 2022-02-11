@@ -24,7 +24,6 @@ workflows:
       - build
       
   my-workflow:
-    when: << pipeline.parameters.run-region >>
     jobs:
       - build
 
