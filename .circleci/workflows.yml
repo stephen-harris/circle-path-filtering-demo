@@ -1,9 +1,6 @@
 version: 2.1
 
 parameters:
-  run-region:
-    type: boolean
-    default: false
   region:
     type: string
     default: "na"
