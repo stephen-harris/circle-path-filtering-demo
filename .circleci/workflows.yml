@@ -4,6 +4,9 @@ parameters:
   run-build:
     type: boolean
     default: false
+  regions:
+    type: boolean
+    default: false
 
 jobs:
   build:
@@ -11,9 +14,25 @@ jobs:
     steps:
       - run: "Dummy build"
 
+  cat-file:
+    parameters:
+      file:
+        type: string
+    steps:
+      - print:
+          message: Printing << parameters.file >>
+      - run: cat << parameters.file >>
+
 workflows:
   version: 2.1
   infrastructure:
     when: << pipeline.parameters.run-build >>
     jobs:
       - build
+      
+  my-workflow:
+    when: << pipeline.parameters.run-region >>
+    jobs:
+      - cat-file:
+          file: test.txt
+
