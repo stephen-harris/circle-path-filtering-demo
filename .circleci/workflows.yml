@@ -28,7 +28,7 @@ workflows:
             parameters:
               region: [
                  <<#pipeline.parameters.region-eu1>>eu1<</pipeline.parameters.region-eu1>>,
-                 <<#pipeline.parameters.region-ap1>>ap1<</pipeline.parameters.region-ap1>>
+                 ap1
               ]
             exclude:
                - region: ap1
