@@ -6,21 +6,13 @@ orbs:
   path-filtering: circleci/path-filtering@0.0.2
 
 workflows:
-  setup-ap1:
-    jobs:
-      - path-filtering/filter:
-          mapping: |
-            ap1/.* region-ap1 true
-            common/.* region-ap1 true
-          base-revision: main
-          config-path: .circleci/workflows.yml
-
-  setup-eu1:
+  setup:
     jobs:
       - path-filtering/filter:
           mapping: |
             eu1/.* region-eu1 true
+            ap1/.* region-ap1 true
             common/.* region-eu1 true
+            common/.* region-ap1 true
           base-revision: main
           config-path: .circleci/workflows.yml
-
