@@ -45,10 +45,11 @@ workflows:
       - build:
           <<: *region-specific
       - build:
-          name: "only on main"
+          name: "only on main << matrix.region >>"
           <<: *region-specific
           <<: *main-only
       - build:
-          name: "not on main"
+          name: "not on main << matrix.region >>"
+          <<: *region-specific
           <<: *not-main
 
