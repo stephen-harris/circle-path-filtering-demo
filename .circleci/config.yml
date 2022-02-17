@@ -15,7 +15,6 @@ workflows:
           base-revision: main
           config-path: .circleci/workflows.yml
 
-workflows:
   setup-eu1:
     jobs:
       - path-filtering/filter:
