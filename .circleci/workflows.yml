@@ -19,6 +19,14 @@ aliases:
            <<#pipeline.parameters.region-eu1>>eu1<</pipeline.parameters.region-eu1>>,
            <<#pipeline.parameters.region-ap1>>ap1<</pipeline.parameters.region-ap1>>,
         ]
+  - &main-only
+    filters:
+      branches:
+        only: main
+  - &not-main
+    filters:
+      branches:
+        ignore: main
 
 jobs:
   build:
@@ -36,4 +44,11 @@ workflows:
     jobs:
       - build:
           <<: *region-specific
+      - build:
+          name: "only on main"
+          <<: *region-specific
+          <<: *main-only
+      - build:
+          name: "not on main"
+          <<: *not-main
 
