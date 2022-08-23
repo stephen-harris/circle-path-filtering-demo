@@ -4,18 +4,22 @@ setup: true
 
 orbs:
   path-filtering: circleci/path-filtering@0.0.2
+  continuation: circleci/continuation@0.1.0
 
 workflows:
   setup:
     jobs:
-      - checkout
-      - run: 
-          name: Generate workflows file
-          command: |
-            cp .circleci/workflows.yml .circleci/workflows.generated.yml
-      - continuation/continue:
-          parameters: '{}'
-          configuration_path: .circleci/workflows.generated.yml
+      - generate-config:
+          executor: continuation/default
+          steps:
+            - checkout
+            - run: 
+              name: Generate workflows file
+              command: |
+                cp .circleci/workflows.yml .circleci/workflows.generated.yml
+            - continuation/continue:
+              parameters: '{}'
+              configuration_path: .circleci/workflows.generated.yml
       - path-filtering/filter:
           mapping: |
             eu1/.* region-eu1 true
