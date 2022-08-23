@@ -8,6 +8,14 @@ orbs:
 workflows:
   setup:
     jobs:
+      - checkout
+      - run: 
+          name: Generate workflows file
+          command: |
+            cp .circleci/workflows.yml .circleci/workflows.generated.yml
+      - continuation/continue:
+          parameters: '{}'
+          configuration_path: .circleci/workflows.generated.yml
       - path-filtering/filter:
           mapping: |
             eu1/.* region-eu1 true
@@ -15,4 +23,4 @@ workflows:
             common/.* region-eu1 true
             common/.* region-ap1 true
           base-revision: main
-          config-path: .circleci/workflows.yml
+          config-path: .circleci/workflows.generated.yml
