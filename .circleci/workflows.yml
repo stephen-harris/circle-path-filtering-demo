@@ -37,11 +37,11 @@ workflows:
       - build:
           region: eu1
       - build:
-          name: "only on main << matrix.region >>"
+          name: "only on main"
           region: eu1
           <<: *main-only
       - build:
-          name: "not on main << matrix.region >>"
+          name: "not on main"
           region: eu1
           <<: *not-main
 
@@ -52,10 +52,10 @@ workflows:
       - build:
           region: ap1
       - build:
-          name: "only on main << matrix.region >>"
+          name: "only on main"
           region: ap1
           <<: *main-only
       - build:
-          name: "not on main << matrix.region >>"
+          name: "not on main"
           region: ap1
           <<: *not-main
