@@ -32,7 +32,7 @@ workflows:
   version: 2.1  
   workflow-ovo:
     when:
-      << pipeline.parameters.eu1 >>
+      << pipeline.parameters.region-eu1 >>
     jobs:
       - build:
           region: eu1
@@ -47,7 +47,7 @@ workflows:
 
   workflow-oea:
     when:
-      << pipeline.parameters.ap1 >>
+      << pipeline.parameters.region-ap1 >>
     jobs:
       - build:
           region: ap1
