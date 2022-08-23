@@ -9,16 +9,6 @@ parameters:
     default: false
 
 aliases:
-  - &region-specific
-    filters:
-      branches:
-        ignore: /<< matrix.region >>.*/
-    matrix:
-      parameters:
-        region: [
-           <<#pipeline.parameters.region-eu1>>eu1<</pipeline.parameters.region-eu1>>,
-           <<#pipeline.parameters.region-ap1>>ap1<</pipeline.parameters.region-ap1>>,
-        ]
   - &main-only
     filters:
       branches:
@@ -40,16 +30,32 @@ jobs:
       
 workflows:
   version: 2.1  
-  my-workflow:
+  workflow-ovo:
+    when:
+      << pipeline.parameters.eu1 >>
     jobs:
       - build:
-          <<: *region-specific
+          region: eu1
       - build:
           name: "only on main << matrix.region >>"
-          <<: *region-specific
+          region: eu1
           <<: *main-only
       - build:
           name: "not on main << matrix.region >>"
-          <<: *region-specific
+          region: eu1
           <<: *not-main
 
+  workflow-ovo:
+    when:
+      << pipeline.parameters.eu1 >>
+    jobs:
+      - build:
+          region: ap1
+      - build:
+          name: "only on main << matrix.region >>"
+          region: ap1
+          <<: *main-only
+      - build:
+          name: "not on main << matrix.region >>"
+          region: ap1
+          <<: *not-main
