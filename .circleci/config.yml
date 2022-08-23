@@ -31,7 +31,18 @@ jobs:
       - run: 
           name: Generate workflows file
           command: |
-            cp .circleci/workflows.yml .circleci/workflows.generated.yml
+            cp .circleci/workflows.template.yml .circleci/workflows.generated.yml
+            
+            YAML=$(cat .circleci/workflows.generated.yml | yq -o json .workflows.template | sed --expression 's/$REGION/eu1/g')
+            yq -i e ".workflows.workflow-eu1 = $YAML" .circleci/workflows.generated.yml
+
+            YAML=$(cat .circleci/workflows.generated.yml | yq -o json .workflows.template | sed --expression 's/$REGION/ap1/g')
+            yq -i e ".workflows.workflow-ap1 = $YAML" .circleci/workflows.generated.yml
+
+            yq -i 'del(.workflows.template)' .circleci/workflows.generated.yml
+
+            
+
       - path-filtering/set-parameters:
           base-revision: << parameters.base-revision >>
           mapping: << parameters.mapping >>

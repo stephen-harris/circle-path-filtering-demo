@@ -1,0 +1,42 @@
+version: 2.1
+parameters:
+  region-ap1:
+    type: boolean
+    default: false
+  region-eu1:
+    type: boolean
+    default: false
+
+aliases:
+  - &main-only
+    filters:
+      branches:
+        only: main
+  - &not-main
+    filters:
+      branches:
+        ignore: main
+
+jobs:
+  build:
+    parameters:
+      region:
+        type: string
+        default: "na"
+    machine: true
+    steps:
+      - run: echo << parameters.region >>
+workflows:
+  template:
+    when: << pipeline.parameters.region-eu1 >>
+    jobs:
+      - build:
+          region: $REGION
+      - build:
+          name: "only on main"
+          region: $REGION
+          !!merge <<: *main-only
+      - build:
+          name: "not on main"
+          region: $REGION
+          !!merge <<: *not-main
