@@ -45,9 +45,9 @@ workflows:
           region: eu1
           <<: *not-main
 
-  workflow-ovo:
+  workflow-oea:
     when:
-      << pipeline.parameters.eu1 >>
+      << pipeline.parameters.ap1 >>
     jobs:
       - build:
           region: ap1
