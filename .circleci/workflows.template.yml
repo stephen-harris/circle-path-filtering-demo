@@ -28,7 +28,7 @@ jobs:
       - run: echo << parameters.region >>
 workflows:
   template:
-    when: << pipeline.parameters.region-eu1 >>
+    when: << pipeline.parameters.region-$REGION >>
     jobs:
       - build:
           region: $REGION
