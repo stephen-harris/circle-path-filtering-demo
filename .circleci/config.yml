@@ -8,6 +8,23 @@ orbs:
 
 jobs:
   generate-config:
+    parameters:
+      base-revision:
+          default: main
+          description: |
+              The revision to compare the current one against for the purpose of determining changed files.
+          type: string
+      config-path:
+          default: .circleci/continue_config.yml
+          description: |
+              The location of the config to continue the pipeline with.
+          type: string
+      mapping:
+          default: ""
+          description: |
+              Mapping of path regular expressions to pipeline parameters and values. One mapping per line, whitespace-delimited.
+          type: string
+            
     executor: continuation/default
     steps:
       - checkout
@@ -15,15 +32,18 @@ jobs:
           name: Generate workflows file
           command: |
             cp .circleci/workflows.yml .circleci/workflows.generated.yml
+      - set-parameters:
+          base-revision: << parameters.base-revision >>
+          mapping: << parameters.mapping >>
       - continuation/continue:
-          parameters: '{}'
-          configuration_path: .circleci/workflows.generated.yml
+          circleci_domain: circleci.com
+          configuration_path: << parameters.config-path >>
+          parameters: /tmp/pipeline-parameters.json
 
 workflows:
   setup:
     jobs:
-      - generate-config
-      - path-filtering/filter:
+      - generate-config:
           mapping: |
             eu1/.* region-eu1 true
             ap1/.* region-ap1 true
