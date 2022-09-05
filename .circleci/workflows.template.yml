@@ -38,5 +38,6 @@ workflows:
           !!merge <<: *main-only
       - build:
           name: "not on main"
+          context: jaws-test
           region: $REGION
           !!merge <<: *not-main
